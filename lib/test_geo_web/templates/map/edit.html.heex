@@ -1,0 +1,19 @@
+<h1>地点の編集</h1>
+
+<%= form_for @location, Routes.map_path(@conn, :update), fn f -> %>
+
+    <%= label f, :lat, "緯度"%>
+    <%= number_input f, :lat, step: 0.0001 %>
+    <%= error_tag f, :lat %>
+
+    <%= label f, :lng, "経度"%>
+    <%= number_input f, :lng, step: 0.0001 %>
+    <%= error_tag f, :lng %>
+
+    <%= label f, :name, "地名"%>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+
+    <button type="submit">更新</button>
+
+<% end %>

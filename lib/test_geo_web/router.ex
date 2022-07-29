@@ -20,7 +20,10 @@ defmodule TestGeoWeb.Router do
     get "/", MapController, :index
     get "/new", MapController, :new
     post "/new", MapController, :create
-    delete "/delete", MapController, :delete
+    get "/detail", MapController, :detail
+    get "/edit", MapController, :edit
+    get "/edit", MapController, :update
+    delete "/", MapController, :delete
   end
 
   # Other scopes may use custom stacks.

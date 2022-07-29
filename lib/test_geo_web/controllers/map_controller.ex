@@ -27,13 +27,36 @@ defmodule TestGeoWeb.MapController do
     end
   end
 
-  def delete(conn, params) do
-    IO.inspect(params)
-    case location = Repo.get(Location, params) do
+  def detail(conn, %{"id" => id}) do
+    case location = Repo.get(Location, id) do
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "詳細情報の取得に失敗しました。")
+        |> redirect(to: Routes.map_path(conn, :index))
+      _ ->
+        conn
+        |> render("detail.html", location: Location.changeset(location))
+    end
+  end
+
+  def edit(conn, %{"id" => id}) do
+    case location = Repo.get(Location, id) do
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "詳細情報の取得に失敗しました。")
+        |> redirect(to: Routes.map_path(conn, :index))
+      _ ->
+        conn
+        |> render("edit.html", location: location)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    case location = Repo.get(Location, id) do
       {:error, _} ->
         conn
         |> put_flash(:info, "削除に失敗しました。")
-        |> redirect(to: Routes.map_path(conn, :new))
+        |> redirect(to: Routes.map_path(conn, :index))
       _ ->
         Repo.delete(location)
         conn

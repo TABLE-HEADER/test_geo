@@ -15,10 +15,7 @@
   </script>
 
 <body onload="init()">
-  <h1>地図表示</h1>
-  <%= link to: Routes.map_path(@conn, :new) do %>
-    <span>＜新規地点の登録＞</span>
-  <% end %>
+  <h1>詳細表示</h1>
   <div id="map" style="width:720px;height:480px"></div>
 
   <table>
@@ -28,17 +25,15 @@
       <th>地名</th>
       <th></th>
     </tr>
-    <%= for l <- @locations do %>
-        <tr>
-          <td><%= l.lat %></td>
-          <td><%= l.lng %></td>
-          <td><%= l.name %></td>
-          <td>
-            <%= link "詳細", to: Routes.map_path(@conn, :detail, id: l.id) %>
-            | <%= link "編集", to: Routes.map_path(@conn, :edit, id: l.id) %>
-            | <%= link "削除", to: Routes.map_path(@conn, :delete, id: l.id), method: :delete %>
-          </td>
-        </tr>
-    <% end %>
+    <tr>
+        <td><%= @location.lat %></td>
+        <td><%= @location.lng %></td>
+        <td><%= @location.name %></td>
+        <td>
+        <%= link "編集", to: Routes.map_path(@conn, :edit, id: @location.id) %>
+        | <%= link "削除", to: Routes.map_path(@conn, :delete, id: @location.id), method: :delete %>
+        </td>
+    </tr>
   </table>
+  <%= link "トップに戻る", to: Routes.map_path(@conn, :index) %>
 </body>
