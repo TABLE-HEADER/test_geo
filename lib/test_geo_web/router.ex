@@ -17,7 +17,10 @@ defmodule TestGeoWeb.Router do
   scope "/", TestGeoWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", MapController, :index
+    get "/new", MapController, :new
+    post "/new", MapController, :create
+    delete "/delete", MapController, :delete
   end
 
   # Other scopes may use custom stacks.
